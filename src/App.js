@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import background from "./images/shutterstock.png";
+import logo from "./images/LOGO.png";
+import agency from "./images/LOGO2.png";
+import "./App.css";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ backgroundImage: `url(${background})` }}>
+      <figure>
+        <img className="mainLogo" src={logo} alt="" />
+      </figure>
+      <hr />
+      <button className="btn">ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ</button>
+      <img className="agency" src={agency} alt="" />
     </div>
   );
 }
-
-export default App;

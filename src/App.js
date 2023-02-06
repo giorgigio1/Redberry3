@@ -1,5 +1,6 @@
 import Personal from "./Personal";
-import "./App.css";
+import Home from "./Home";
+import "./styles/App.css";
 import "./styles/personal.css";
 
 export default function App() {

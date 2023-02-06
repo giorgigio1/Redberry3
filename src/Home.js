@@ -1,7 +1,7 @@
 import background from "./images/shutterstock.png";
 import logo from "./images/LOGO.png";
 import agency from "./images/LOGO2.png";
-import "./App.css";
+import "./styles/App.css";
 
 export default function Home() {
   return (

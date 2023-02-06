@@ -9,7 +9,7 @@ export default function Home() {
       <figure>
         <img className="mainLogo" src={logo} alt="" />
       </figure>
-      <hr />
+      <hr className="homeHr" />
       <button className="btn">ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ</button>
       <img className="agency" src={agency} alt="" />
     </div>

@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "HelveticaNeue";
+  src: url(/public/fonts/HelveticaNeue.ttc);
+}
+
+@font-face {
+  font-family: "mtav";
+  src: url(/public/fonts/mtav.ttf);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -28,6 +38,8 @@ hr {
   color: white;
   border-radius: 9px;
   z-index: 1;
+  cursor: pointer;
+  font-family: "HelveticaNeue";
 }
 
 .agency {

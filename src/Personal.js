@@ -1,7 +1,7 @@
 import "./styles/personal.css";
-import { Header } from "./comonents/global/header";
-import { PersonalInfo } from "./comonents/personalInfo";
-import { UserProfile } from "./comonents/global/userProfile";
+import { Header } from "./components/global/header";
+import { PersonalInfo } from "./components/personalInfo";
+import { UserProfile } from "./components/global/userProfile";
 
 export default function Personal() {
   return (

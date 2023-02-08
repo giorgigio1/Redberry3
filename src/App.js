@@ -1,5 +1,5 @@
 import Personal from "./Personal";
-import Home from "./Home";
+// import Home from "./Home";
 import "./styles/App.css";
 import "./styles/personal.css";
 

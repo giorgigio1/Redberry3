@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const Input = ({ label, placeholder, description }) => {
+export const Input = ({ label, placeholder, description, type }) => {
   return (
     <WrapperDiv>
       <label>{label}</label>
-      <input type="text" placeholder={placeholder} />
+      <input type={type} placeholder={placeholder} />
       <span>{description}</span>
     </WrapperDiv>
   );

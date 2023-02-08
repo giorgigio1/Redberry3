@@ -1,5 +1,6 @@
 import { Input } from "./global/Input";
 import { useRef } from "react";
+import { Textarea } from "./global/textarea";
 
 export const PersonalInfo = () => {
   const uploadRef = useRef();
@@ -14,11 +15,13 @@ export const PersonalInfo = () => {
           label={"სახელი"}
           placeholder="გიორგი"
           description={"მინიმუმ 2 ასო, ქართული ასოები"}
+          type="text"
         />
         <Input
           label={"გვარი"}
           placeholder="გიორგაძე"
           description={"მინიმუმ 2 ასო, ქართული ასოები"}
+          type="text"
         />
       </div>
       <div className="upload">
@@ -34,22 +37,29 @@ export const PersonalInfo = () => {
           ატვირთვა
         </button>
       </div>
-      <div className="aboutMe">
-        <label>ჩემ შესახებ (არასავალდებულო)</label>
-        <input type="textarea" placeholder="ზოგადი ინფო შენ შესახებ" />
-      </div>
+      <Textarea
+        title="ჩემ შესახებ (არასავალდებულო)"
+        placeholder="ზოგადი ინფო შენ შესახებ"
+        rows="1"
+      />
       <Input
         label={"ელ.პოსტა"}
         placeholder="giorgigiorgadze93@redberry.ge"
         description={"უნდა მთავრდებოდეს @redberry.ge-თი"}
+        type="text"
       />
       <Input
         label={"მობილურის ნომერი"}
         placeholder="+995 551 42 23 22"
         description={"უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს"}
+        type="text"
       />
-      <button className="nextBtn">შემდეგი</button>
-      <button className="prevBtn">უკან</button>
+      <div className="buttons">
+        <button className="nextBtn">შემდეგი</button>
+        <button className="prevBtn">უკან</button>
+      </div>
+      {/* <button className="nextBtn">შემდეგი</button>
+      <button className="prevBtn">უკან</button> */}
     </section>
   );
 };

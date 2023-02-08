@@ -23,7 +23,7 @@ export const HeaderWrapper = styled.header`
   & .backLogo {
     position: absolute;
     top: 42px;
-    left: 20px;
+    left: 38px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -36,5 +36,8 @@ export const HeaderWrapper = styled.header`
   & .headerInfo {
     display: flex;
     justify-content: space-between;
+    & h2 {
+      font-family: mtav;
+    }
   }
 `;

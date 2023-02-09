@@ -1,9 +1,22 @@
 import styled from "styled-components";
 
-export const Textarea = ({ title, placeholder, rows }) => (
+export const Textarea = ({
+  title,
+  placeholder,
+  rows,
+  name,
+  onChange,
+  value,
+}) => (
   <TextareaWrapper>
     <label>{title}</label>
-    <textarea placeholder={placeholder} rows={rows}></textarea>
+    <textarea
+      value={value}
+      onChange={onChange}
+      name={name}
+      placeholder={placeholder}
+      rows={rows}
+    ></textarea>
   </TextareaWrapper>
 );
 

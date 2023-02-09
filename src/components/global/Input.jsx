@@ -1,10 +1,24 @@
 import styled from "styled-components";
 
-export const Input = ({ label, placeholder, description, type }) => {
+export const Input = ({
+  label,
+  placeholder,
+  description,
+  type,
+  name,
+  onChange,
+  value,
+}) => {
   return (
     <WrapperDiv>
       <label>{label}</label>
-      <input type={type} placeholder={placeholder} />
+      <input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+      />
       <span>{description}</span>
     </WrapperDiv>
   );

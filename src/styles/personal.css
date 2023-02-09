@@ -24,11 +24,12 @@ span,
 input::placeholder {
   font-family: HelveticaNeue;
 }
-section {
+.mainWrapper {
   display: flex;
   flex-direction: column;
   width: 76%;
   margin: 0 auto;
+  height: 84%;
 }
 .parent {
   display: flex;
@@ -56,11 +57,14 @@ span {
   font-size: 13px;
   cursor: pointer;
 }
-.buttons {
-  margin-top: 140px;
-  /* position: absolute; */
+.buttonsContainer {
+  width: 100%;
+  /* display: flex;
+  justify-content: space-between; */
+  margin-top: auto;
 }
 .prevBtn {
+  float: left;
   padding: 16px 38px;
   background-color: #6b40e3;
   border: none;

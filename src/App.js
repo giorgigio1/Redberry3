@@ -1,5 +1,4 @@
-import Personal from "./Personal";
-import Experience from "../src/experience";
+import UserRegistration from "./userRegistration";
 // import Home from "./Home";
 import "./styles/App.css";
 import "./styles/experience.css";
@@ -9,8 +8,8 @@ export default function App() {
   return (
     <>
       {/* <Home /> */}
-      {/* <Personal /> */}
-      <Experience />
+      <UserRegistration />
+      {/* <Experience /> */}
     </>
   );
 }

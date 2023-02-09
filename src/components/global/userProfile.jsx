@@ -4,13 +4,16 @@ import phone from "../../images/phone.png";
 import profile from "../../images/profile.png";
 import { InfoDetails } from "./infoDetails";
 
-export const UserProfile = () => {
+export const UserProfile = ({ es }) => {
   return (
     <div className="right">
       <div className="personalInfoComponent">
         <div className="half">
           <div className="textSide">
-            <h2>გიორგი გიორგაძე</h2>
+            <h2>
+              {es.username}
+              {es.lastname}
+            </h2>
             <figure className="mailRight">
               <img src={mail} alt="" />
               <p>giorgigiorgadze93@redberry.ge</p>

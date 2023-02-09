@@ -3,6 +3,9 @@
   gap: 60px;
   margin-bottom: 20px;
 }
+.startEndDates input {
+  color: rgb(134, 134, 134);
+}
 .expHr {
   margin: 30px 0;
 }
@@ -13,4 +16,5 @@
   border: none;
   border-radius: 4px;
   color: white;
+  cursor: pointer;
 }

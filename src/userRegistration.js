@@ -4,33 +4,56 @@ import { PersonalInfo } from "./components/personalInfo";
 import { UserProfile } from "./components/global/userProfile";
 import { ExperienceInfo } from "./components/experienceinfo";
 import { useState } from "react";
+import { convertBase64, getStringedDate } from "./lib/helpers";
+import { EducationInfo } from "./components/educationInfo";
 
-const title = { 1: "პირადი ინფო", 2: "გამოცდილება" };
+const title = { 1: "პირადი ინფო", 2: "გამოცდილება", 3: "განათლება" };
 const experienceDefaultState = {
   position: "",
   employer: "",
-  startDate: new Date(),
-  endDate: new Date(),
+  startDate: getStringedDate(new Date(), new Date()),
+  endDate: getStringedDate(new Date(), new Date()),
   experienceDescription: "",
 };
-
-const test = [1, 2];
 
 const UserRegistration = () => {
   const [tab, setTab] = useState(1);
 
   const [registrationForm, setRegistrationForm] = useState({
-    personalInfo: {},
+    personalInfo: {
+      username: "",
+      lastname: "",
+      picture: "",
+      email: "",
+      phone: "",
+      aboutMeDescription: "",
+    },
     experienceInfo: [experienceDefaultState],
   });
-  console.log(registrationForm.experienceInfo);
+  console.log("personalInfo", registrationForm.personalInfo);
+  console.log("experienceInfo", registrationForm.experienceInfo);
   const handlePeviousTab = () => {
     setTab((prevousTab) => {
       return prevousTab === 1 ? prevousTab : prevousTab - 1;
     });
   };
 
-  const handlenextTab = () => {
+  const handleImageUpload = async (event) => {
+    console.log(event);
+    const bs64 = await convertBase64(event.target.files[0]);
+    setRegistrationForm((previousForm) => {
+      return {
+        ...previousForm,
+        personalInfo: {
+          ...previousForm.personalInfo,
+          picture: event.target.files[0],
+          bs64,
+        },
+      };
+    });
+  };
+
+  const handleNextTab = () => {
     setTab((prevousTab) => {
       return prevousTab === 3 ? prevousTab : prevousTab + 1;
     });
@@ -39,7 +62,8 @@ const UserRegistration = () => {
   const handlePersonalInfosChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    console.log(name);
+    console.log("სახელი", name);
+    console.log("მნიშვნელობა", value);
     setRegistrationForm((previousForm) => {
       return {
         ...previousForm,
@@ -50,8 +74,22 @@ const UserRegistration = () => {
       };
     });
   };
+  const handleExperienceChange = (index, event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-  const handleAddNewExperience = () => {
+    let tmp = [...registrationForm.experienceInfo];
+    tmp[index] = { ...tmp[index], [name]: value };
+    console.log("მნიშვნელობა", tmp);
+    setRegistrationForm((prevData) => {
+      return {
+        ...prevData,
+        experienceInfo: tmp,
+      };
+    });
+  };
+
+  const handleAddNewExperience = (event) => {
     setRegistrationForm((previousForm) => {
       return {
         ...previousForm,
@@ -69,26 +107,36 @@ const UserRegistration = () => {
         <Header title={title[tab]} page={`${tab}/3`} />
         <div className="mainWrapper">
           <form>
-            <PersonalInfo
-              tab={tab}
-              onPersonalInfoChange={handlePersonalInfosChange}
-              formValues={registrationForm.personalInfo}
-            />
-            <div className="rame">
-              {/* <ExperienceInfo tab={tab} /> */}
-              {registrationForm.experienceInfo.map((experience, index) => (
-                <ExperienceInfo key={index} tab={tab} experience={experience} />
-              ))}
-              {tab === 2 && (
-                <button
-                  type="button"
-                  onClick={handleAddNewExperience}
-                  className="addMoreExp"
-                >
-                  მეტი გამოცდილების დამატება
-                </button>
-              )}
-            </div>
+            {tab === 1 ? (
+              <PersonalInfo
+                tab={tab}
+                onPersonalInfoChange={handlePersonalInfosChange}
+                formValues={registrationForm.personalInfo}
+                onImageUpload={handleImageUpload}
+              />
+            ) : tab === 2 ? (
+              <>
+                <div className="rame">
+                  {registrationForm.experienceInfo.map((experience, index) => (
+                    <ExperienceInfo
+                      key={index}
+                      index={index}
+                      handleChange={handleExperienceChange}
+                      experience={experience}
+                    />
+                  ))}
+                  <button
+                    type="button"
+                    onClick={handleAddNewExperience}
+                    className="addMoreExp"
+                  >
+                    მეტი გამოცდილების დამატება
+                  </button>
+                </div>
+              </>
+            ) : tab === 3 ? (
+              <EducationInfo />
+            ) : null}
           </form>
           <div className="buttonsContainer">
             {tab > 1 && (
@@ -96,13 +144,16 @@ const UserRegistration = () => {
                 უკან
               </button>
             )}
-            <button onClick={handlenextTab} className="nextBtn">
+            <button onClick={handleNextTab} className="nextBtn">
               შემდეგი
             </button>
           </div>
         </div>
       </div>
-      <UserProfile es={registrationForm.personalInfo} />
+      <UserProfile
+        personalInfo={registrationForm.personalInfo}
+        experienceInfo={registrationForm.experienceInfo}
+      />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { Input } from "./global/Input";
 import { useRef } from "react";
 import { Textarea } from "./global/textarea";
 
-export const PersonalInfo = ({ tab, onPersonalInfoChange, formValues }) => {
+export const PersonalInfo = ({ tab, onPersonalInfoChange, formValues, onImageUpload }) => {
   const uploadRef = useRef();
 
   const handleUploadClick = () => {
@@ -38,6 +38,8 @@ export const PersonalInfo = ({ tab, onPersonalInfoChange, formValues }) => {
           type="file"
           accept="image/*"
           hidden
+          name="picture"
+          onChange={onImageUpload}
         />
         <button onClick={handleUploadClick} className="uploadBtn" type="button">
           ატვირთვა

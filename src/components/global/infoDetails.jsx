@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export const InfoDetails = ({ title, date, text, experience }) => (
+export const InfoDetails = ({ header, date, title, description }) => (
   <ExperienceWrapper>
-    <h3>{title}</h3>
-    <p className="expEducation">{experience}</p>
+    <h3>{header}</h3>
+    <p className="expEducation">{title}</p>
     <span>{date}</span>
-    <p className="descParagraph">{text}</p>
+    <p className="descParagraph">{description}</p>
     <hr />
   </ExperienceWrapper>
 );

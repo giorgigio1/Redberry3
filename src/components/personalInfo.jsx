@@ -2,32 +2,37 @@ import { Input } from "./global/Input";
 import { useRef } from "react";
 import { Textarea } from "./global/textarea";
 
-export const PersonalInfo = ({ tab, onPersonalInfoChange, formValues, onImageUpload }) => {
+export const PersonalInfo = ({
+  onPersonalInfoChange,
+  formValues,
+  onImageUpload,
+}) => {
   const uploadRef = useRef();
 
   const handleUploadClick = () => {
     uploadRef.current.click();
   };
+
   return (
-    <section style={{ display: tab === 1 ? "block" : "none" }}>
+    <section>
       <div className="parent">
         <Input
           label={"სახელი"}
           placeholder="გიორგი"
           description={"მინიმუმ 2 ასო, ქართული ასოები"}
           type="text"
-          name="username"
+          name="name"
           onChange={onPersonalInfoChange}
-          value={formValues["username"]}
+          value={formValues.name}
         />
         <Input
           label={"გვარი"}
           placeholder="გიორგაძე"
           description={"მინიმუმ 2 ასო, ქართული ასოები"}
           type="text"
-          name="lastname"
+          name="surname"
           onChange={onPersonalInfoChange}
-          value={formValues["lastname"]}
+          value={formValues.surname}
         />
       </div>
       <div className="upload">
@@ -49,9 +54,9 @@ export const PersonalInfo = ({ tab, onPersonalInfoChange, formValues, onImageUpl
         title="ჩემ შესახებ (არასავალდებულო)"
         placeholder="ზოგადი ინფო შენ შესახებ"
         rows="1"
-        name="aboutMeDescription"
+        name="about_me"
         onChange={onPersonalInfoChange}
-        value={formValues["aboutMeDescription"]}
+        value={formValues.about_me}
       />
       <Input
         label={"ელ.პოსტა"}
@@ -60,16 +65,16 @@ export const PersonalInfo = ({ tab, onPersonalInfoChange, formValues, onImageUpl
         type="text"
         name="email"
         onChange={onPersonalInfoChange}
-        value={formValues["email"]}
+        value={formValues.email}
       />
       <Input
         label={"მობილურის ნომერი"}
         placeholder="+995 551 42 23 22"
         description={"უნდა აკმაყოფილებდეს ქართული მობილური ნომრის ფორმატს"}
         type="text"
-        name="phone"
+        name="phone_number"
         onChange={onPersonalInfoChange}
-        value={formValues["phone"]}
+        value={formValues.phone_number}
       />
     </section>
   );

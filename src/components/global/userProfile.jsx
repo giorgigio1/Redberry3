@@ -1,53 +1,73 @@
 import LogoRight from "../../images/LogoRight.png";
 import mail from "../../images/mail.png";
 import phone from "../../images/phone.png";
-import profile from "../../images/profile.png";
 import { InfoDetails } from "./infoDetails";
 
-export const UserProfile = ({ personalInfo, experienceInfo }) => {
-  console.log("personalinfo", personalInfo);
+export const UserProfile = ({
+  id,
+  name,
+  surname,
+  email,
+  phone_number,
+  about_me,
+  experiences,
+  educations,
+  image,
+}) => {
   return (
     <div className="right">
       <div className="personalInfoComponent">
         <div className="half">
           <div className="textSide">
             <h2>
-              {personalInfo.username} {personalInfo.lastname}
+              {name} {surname}
             </h2>
-            {personalInfo.email && (
+            {email && (
               <figure className="mailRight">
                 <img src={mail} alt="" />
-                <p>{personalInfo.email}</p>
+                <p>{email}</p>
               </figure>
             )}
-            {personalInfo.phone && (
+            {phone_number && (
               <figure className="phoneRight">
                 <img src={phone} alt="" />
-                <p>{personalInfo.phone}</p>
+                <p>{phone_number}</p>
               </figure>
             )}
 
-            {personalInfo.aboutMeDescription && <h3>ჩემ შესახებ</h3>}
-            <p className="aboutMeText">{personalInfo.aboutMeDescription}</p>
+            {about_me && <h3>ჩემ შესახებ</h3>}
+            <p className="aboutMeText">{about_me}</p>
           </div>
-          {personalInfo.bs64 && (
+          {image && (
             <figure className="pictureSide">
-              <img src={personalInfo.bs64} alt="" />
+              <img src={image} alt="" />
             </figure>
           )}
         </div>
         <hr className="personalHr" />
       </div>
-      {experienceInfo.map((info, index) => (
+      {experiences.map((experience, index) => (
         <InfoDetails
           key={index}
-          title="გამოცდილება"
-          date={`${info.startDate}  ${info.endDate}`}
+          header="გამოცდილება"
+          title={`${experience.position} ${experience.employer}`}
+          description={experience.description}
+          date={`${experience.start_date}  ${experience.due_date}`}
           // date="2020-09-23 - 2020-09-23"
-          text={info.experienceDescription}
-          experience={`${info.position} ${info.employer}`}
         />
       ))}
+      {educations.map((education, index) => {
+        return (
+          <InfoDetails
+            key={index}
+            header="განათლება"
+            title={`${education.institute} ${education.degree}`}
+            description={education.description}
+            date={`${education.due_date}`}
+            // date="2020-09-23 - 2020-09-23"
+          />
+        );
+      })}
       <figure className="bottomLogoStar">
         <img src={LogoRight} alt="" />
       </figure>

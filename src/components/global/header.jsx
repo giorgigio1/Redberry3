@@ -20,6 +20,7 @@ export const HeaderWrapper = styled.header`
   width: 76%;
   margin: 0 auto;
   margin-top: 50px;
+  margin-bottom: 40px;
   & .backLogo {
     position: absolute;
     top: 42px;

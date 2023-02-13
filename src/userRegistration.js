@@ -1,4 +1,5 @@
 import "./styles/personal.css";
+import closeModalX from "./images/Vectorx.png";
 import { Header } from "./components/global/header";
 import { PersonalInfo } from "./components/personalInfo";
 import { UserProfile } from "./components/global/userProfile";
@@ -7,6 +8,7 @@ import { useState, Fragment } from "react";
 import { convertBase64, getStringedDate } from "./lib/helpers";
 import { EducationInfo } from "./components/educationInfo";
 import { useDegrees } from "./components/DegreesContext";
+import vector from "./images/Vector.png";
 
 const title = { 1: "პირადი ინფო", 2: "გამოცდილება", 3: "განათლება" };
 const experienceDefaultState = {
@@ -165,7 +167,7 @@ const Tabs = ({ tab, state, setState }) => {
   }
 };
 
-const UserRegistration = () => {
+const UserRegistration = ({ setHomePage }) => {
   const [tab, setTab] = useState(1);
 
   const [registrationForm, setRegistrationForm] = useState({
@@ -184,56 +186,46 @@ const UserRegistration = () => {
   const handlePeviousTab = () => {
     setTab((prevTab) => prevTab - 1);
   };
-
-  const handleNextTab = () => {
-    setTab((prevTab) => prevTab + 1);
+  const [error, setError] = useState("");
+  const validatePersonalInfo = () => {
+    if (!registrationForm.name.length) {
+      setError("Name is required");
+      return false;
+    }
+    if (!registrationForm.surname.length) {
+      setError("surname is required");
+      return false;
+    }
+    return true;
   };
-
+  const validateExperiences = () => {
+    let isValid = true;
+    registrationForm.experiences.map((el) => {
+      if (!isValid) return false;
+      if (el.position.length < 1) {
+        setError("Position is required");
+        isValid = false;
+      }
+    });
+    return isValid;
+  };
+  const validateEducation = () => {};
+  const handleNextTab = () => {
+    let isValid = false;
+    if (tab === 1) {
+      isValid = validatePersonalInfo();
+    } else if (tab === 2) {
+      isValid = validateExperiences();
+    } else if (tab === 3) {
+      isValid = validateEducation();
+      return handleSubmit();
+    }
+    if (isValid) {
+      return setTab((prevTab) => prevTab + 1);
+    }
+  };
   // TODO: გაუწერე სტილები და შეცვალე null-ით
-  const [responseData, setResponseData] = useState({
-    id: 11842,
-    name: "აწდაწდ",
-    surname: "აწდაწდაწდ",
-    email: "rawdawda@redberry.ge",
-    phone_number: "+995551422322",
-    about_me: "აწდაწდაწ",
-    experiences: [
-      {
-        id: 12392,
-        position: "awdawd",
-        employer: "awdawd",
-        start_date: "1111-11-18",
-        due_date: "1111-11-09",
-        description: "awdawdawd",
-      },
-      {
-        id: 12393,
-        position: "წდაწდ",
-        employer: "აწდადწ",
-        start_date: "2023-02-09",
-        due_date: "2023-02-15",
-        description: "აწდაწდაწდ",
-      },
-    ],
-    educations: [
-      {
-        id: 13017,
-        institute: "აწდაწდ",
-        degree: "საშუალო სკოლის დიპლომი",
-        due_date: "2023-02-16",
-        description: "აწდაწდ",
-      },
-      {
-        id: 13018,
-        institute: "აწდწად",
-        degree: "მაგისტრი",
-        due_date: "2023-02-16",
-        description: "აწდაწდაწდად",
-      },
-    ],
-    image:
-      "https://resume.redberryinternship.ge/storage/images/F2CUQlJfmRtFudYmIbPpQIOzImOerXsOZ6wnjyRK.jpg",
-  });
+  const [responseData, setResponseData] = useState(null);
 
   const handleSubmit = () => {
     const {
@@ -287,10 +279,32 @@ const UserRegistration = () => {
       });
   };
 
+  const handleBack = () => {
+    setResponseData(null);
+    setHomePage(true);
+  };
+
+  const [modal, setModal] = useState(true);
+
   if (responseData != null) {
     return (
-      <div className="main">
-        <UserProfile {...responseData} />
+      <div className="resumeContainer">
+        <figure onClick={handleBack} className="backLogo resumeBackLogo">
+          <img src={vector} alt="" />
+        </figure>
+        <UserProfile resumePage={true} {...responseData} />
+        {modal ? (
+          <div className="popUp slide">
+            <p>რეზიუმე წარმატებით გაიგზავნა 🎉</p>
+            <figure
+              onClick={() => {
+                setModal(false);
+              }}
+            >
+              <img src={closeModalX} alt="" />
+            </figure>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -298,13 +312,21 @@ const UserRegistration = () => {
   return (
     <div className="main">
       <div className="left">
-        <Header title={title[tab]} page={`${tab}/3`} />
+        <Header
+          setHomePage={setHomePage}
+          title={title[tab]}
+          page={`${tab}/3`}
+        />
         <div className="mainWrapper">
           <form>
+            {error && <p className="error">{error}</p>}
             <Tabs
               tab={tab}
               state={registrationForm}
-              setState={setRegistrationForm}
+              setState={(data) => {
+                setRegistrationForm(data); //aq rame veli tu sheicvala erorsac asuptaveb ro arwerros sul
+                setError("");
+              }}
             />
           </form>
           <div className="buttonsContainer">
@@ -317,15 +339,9 @@ const UserRegistration = () => {
                 უკან
               </button>
             )}
-            {tab === 3 ? (
-              <button onClick={handleSubmit} className="nextBtn">
-                დასრულება
-              </button>
-            ) : (
-              <button onClick={handleNextTab} className="nextBtn">
-                შემდეგი
-              </button>
-            )}
+            <button onClick={handleNextTab} className="nextBtn">
+              {tab === 3 ? "დასრულება" : "შემდეგი"}
+            </button>
           </div>
         </div>
       </div>

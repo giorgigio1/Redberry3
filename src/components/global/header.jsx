@@ -1,10 +1,10 @@
 import vector from "../../images/Vector.png";
 import styled from "styled-components";
 
-export const Header = ({ title, page }) => {
+export const Header = ({ title, page, setHomePage }) => {
   return (
     <HeaderWrapper>
-      <figure className="backLogo">
+      <figure onClick={() => setHomePage(true)} className="backLogo">
         <img src={vector} alt="" />
       </figure>
       <div className="headerInfo">

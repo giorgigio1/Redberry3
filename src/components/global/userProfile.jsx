@@ -13,9 +13,10 @@ export const UserProfile = ({
   experiences,
   educations,
   image,
+  resumePage,
 }) => {
   return (
-    <div className="right">
+    <div className={`right ${resumePage ? "resumePage" : ""} `}>
       <div className="personalInfoComponent">
         <div className="half">
           <div className="textSide">

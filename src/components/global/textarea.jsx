@@ -23,6 +23,7 @@ export const Textarea = ({
 const TextareaWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   & textarea {
     padding: 10px 0 70px 10px;
     margin-top: 5px;

@@ -45,16 +45,15 @@ export const UserProfile = ({
             </figure>
           )}
         </div>
-        <hr className="personalHr" />
+      {(email || phone_number || about_me || image) &&   <hr className="personalHr" />}
       </div>
       {experiences.map((experience, index) => (
         <InfoDetails
           key={index}
           header="გამოცდილება"
-          title={`${experience.position} ${experience.employer}`}
+          title={`${experience.position}, ${experience.employer}`}
           description={experience.description}
           date={`${experience.start_date}  ${experience.due_date}`}
-          // date="2020-09-23 - 2020-09-23"
         />
       ))}
       {educations.map((education, index) => {
@@ -65,7 +64,6 @@ export const UserProfile = ({
             title={`${education.institute} ${education.degree}`}
             description={education.description}
             date={`${education.due_date}`}
-            // date="2020-09-23 - 2020-09-23"
           />
         );
       })}

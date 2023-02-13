@@ -4,8 +4,8 @@ import { Header } from "./components/global/header";
 import { PersonalInfo } from "./components/personalInfo";
 import { UserProfile } from "./components/global/userProfile";
 import { ExperienceInfo } from "./components/experienceinfo";
-import { useState, Fragment } from "react";
-import { convertBase64, getStringedDate } from "./lib/helpers";
+import { useState } from "react";
+import { convertBase64 } from "./lib/helpers";
 import { EducationInfo } from "./components/educationInfo";
 import { useDegrees } from "./components/DegreesContext";
 import vector from "./images/Vector.png";
@@ -14,14 +14,14 @@ const title = { 1: "პირადი ინფო", 2: "გამოცდი�
 const experienceDefaultState = {
   position: "",
   employer: "",
-  start_date: getStringedDate(new Date(), new Date()),
-  due_date: getStringedDate(new Date(), new Date()),
+  start_date: "",
+  due_date: "",
   description: "",
 };
 const educationDefaultState = {
   institute: "",
   degree_id: null,
-  due_date: getStringedDate(new Date(), new Date()),
+  due_date: "",
   description: "",
 };
 
@@ -58,7 +58,7 @@ const ExperiencesTab = ({ experiences, onChange, onAdd }) => {
   };
 
   return (
-    <Fragment>
+    <>
       {experiences.map((experience, index) => (
         <ExperienceInfo
           key={index}
@@ -70,7 +70,7 @@ const ExperiencesTab = ({ experiences, onChange, onAdd }) => {
       <button type="button" onClick={onAdd} className="addMoreExp">
         მეტი გამოცდილების დამატება
       </button>
-    </Fragment>
+    </>
   );
 };
 
@@ -86,7 +86,7 @@ const EducationsTab = ({ educations, onChange, onAdd }) => {
   };
 
   return (
-    <Fragment>
+    <>
       {educations.map((education, index) => (
         <EducationInfo
           key={index}
@@ -98,7 +98,7 @@ const EducationsTab = ({ educations, onChange, onAdd }) => {
       <button type="button" onClick={onAdd} className="addMoreExp">
         მეტი სასწავლებლის დამატება
       </button>
-    </Fragment>
+    </>
   );
 };
 
@@ -200,7 +200,7 @@ const UserRegistration = ({ setHomePage }) => {
   };
   const validateExperiences = () => {
     let isValid = true;
-    registrationForm.experiences.map((el) => {
+    registrationForm.experiences.forEach((el) => {
       if (!isValid) return false;
       if (el.position.length < 1) {
         setError("Position is required");
@@ -224,7 +224,7 @@ const UserRegistration = ({ setHomePage }) => {
       return setTab((prevTab) => prevTab + 1);
     }
   };
-  // TODO: გაუწერე სტილები და შეცვალე null-ით
+
   const [responseData, setResponseData] = useState(null);
 
   const handleSubmit = () => {
@@ -268,7 +268,12 @@ const UserRegistration = ({ setHomePage }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.errors != null) {
-          // TODO: აჩვენე ერორის შეტყობინება
+          const errorsKeys = Object.keys(data.errors);
+          console.log(errorsKeys);
+          errorsKeys.forEach((key) => {
+            const erroredInput = document.querySelector(`[name='${key}']`);
+            console.log(erroredInput)
+          });
           return;
         }
 

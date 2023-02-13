@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
-export const InfoDetails = ({ header, date, title, description }) => (
-  <ExperienceWrapper>
-    <h3>{header}</h3>
-    <p className="expEducation">{title}</p>
-    <span>{date}</span>
-    <p className="descParagraph">{description}</p>
-    <hr />
-  </ExperienceWrapper>
-);
+export const InfoDetails = ({ header, date, title, description }) => {
+  const isInfoShown =
+    title.trim().length > 1 || description || date.trim().length > 3;
+  return (
+    <ExperienceWrapper>
+      {isInfoShown && <h3>{header}</h3>}
+      {title.trim().length > 1 && <p className="expEducation">{title}</p>}
+      {date.trim().length > 3 && <span>{date}</span>}
+      {description && <p className="descParagraph">{description}</p>}
+      {isInfoShown && <hr />}
+    </ExperienceWrapper>
+  );
+};
 
 const ExperienceWrapper = styled.div`
   & h3 {

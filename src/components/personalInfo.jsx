@@ -43,7 +43,7 @@ export const PersonalInfo = ({
           type="file"
           accept="image/*"
           hidden
-          name="picture"
+          name="image"
           onChange={onImageUpload}
         />
         <button onClick={handleUploadClick} className="uploadBtn" type="button">

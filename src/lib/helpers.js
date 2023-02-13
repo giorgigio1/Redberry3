@@ -1,9 +1,7 @@
-export const getStringedDate = (startDate, endDate) => {
+export const getStringedDate = (startDate) => {
   return `${startDate.getFullYear()}-${
     startDate.getMonth() + 1
-  }-${startDate.getDate()} ${endDate.getFullYear()}-${
-    endDate.getMonth() + 1
-  }-${endDate.getDate()}`;
+  }-${startDate.getDate()}`;
 };
 
 export const convertBase64 = (file) => {
